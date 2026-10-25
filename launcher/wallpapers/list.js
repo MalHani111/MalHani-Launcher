@@ -1,0 +1,1 @@
+var LAUNCHER_WALLPAPERS = ["wallpapers/mountain-lake.jpg","wallpapers/forest.jpg","wallpapers/mountain.jpg"];

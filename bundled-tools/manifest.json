@@ -1,0 +1,12 @@
+{
+  "version": "10.0-tools-v1",
+  "sha256": "377a4db156cf894e38057f0e16d0b917d14660524c86755e0290b4fc7925b4d5",
+  "files": 2228,
+  "unpackedBytes": 498488562,
+  "components": [
+    "WebCLI",
+    "Certificate-Manager",
+    "cert-add-on",
+    "TV-SAMSUNG-Extension-Resources"
+  ]
+}
