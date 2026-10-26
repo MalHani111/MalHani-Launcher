@@ -1,8 +1,6 @@
 <p align="center"><img src="launcher/profile.jpg" width="120" alt="MalHani"></p>
 
-# MalHani Launcher v1.0
-
-**Development version · automatic startup and Home-button behaviour need further work.**
+# MalHani Launcher
 
 A customizable Samsung TV home screen with app shortcuts, nature backgrounds, a clock and optional Malaysian waktu solat.
 
