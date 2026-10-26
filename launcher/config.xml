@@ -15,7 +15,7 @@
         <tizen:description>Starts MalHani Launcher after TV boot.</tizen:description>
     </tizen:service>
     <icon src="icon.png"/>
-    <name>MalHani Launcher</name>
+    <name>MalHani Launcher v1.0</name>
     <tizen:privilege name="http://tizen.org/privilege/application.info"/>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/tv.window"/>
