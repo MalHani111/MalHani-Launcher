@@ -1,4 +1,4 @@
-"""MalHani Launcher guided Windows installer. Run --self-test for an offline smoke test."""
+"""MH Launcher guided Windows installer. Run --self-test for an offline smoke test."""
 from __future__ import annotations
 import json, os, queue, socket, subprocess, sys, threading, time, traceback, webbrowser
 from pathlib import Path
@@ -9,7 +9,7 @@ import core
 GUIDE='https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html'
 CERTIFICATE_GUIDE = (
     '1. In Certificate Manager, click + → Samsung → TV.\n'
-    '2. Profile name: enter MalHaniTV (or your own name), then Next.\n'
+    '2. Profile name: enter MHLauncherTV (or your own name), then Next.\n'
     '3. Choose Create a new author certificate. Author name: your name. Choose a password and keep it.\n'
     '4. Sign in to Samsung when asked. Choose a backup folder and continue.\n'
     '5. Choose Create a new distributor certificate. Set Privilege to Partner.\n'
@@ -20,7 +20,9 @@ CERTIFICATE_GUIDE = (
 
 class Installer(tk.Tk):
     def __init__(self, home=None, testing=False):
-        super().__init__(); self.title('MalHani Launcher Setup · Samsung TV'); self.geometry('1060x800'); self.minsize(940,700)
+        super().__init__(); self.title('MH Launcher Setup · Samsung TV'); self.geometry('1060x800'); self.minsize(940,700)
+        self._brand_icon=tk.PhotoImage(file=str(core.resources()/'launcher'/'brand-mark.png'))
+        self.iconphoto(True,self._brand_icon)
         self.testing=testing; self.home=Path(home) if home else core.data_home()
         self.home.mkdir(parents=True,exist_ok=True); (self.home/'build').mkdir(exist_ok=True)
         self.events=queue.Queue(); self.working=False; self.stage=0; self.info=None; self.apps=[]; self.caps={}; self.inventory=''; self.backup=None
@@ -41,11 +43,11 @@ class Installer(tk.Tk):
         self.style=ttk.Style(); self.style.theme_use('clam'); self.configure(background='#edf3f2')
         self.style.configure('TFrame',background='#edf3f2'); self.style.configure('TLabel',background='#edf3f2',foreground='#163633',font=('Segoe UI',11))
         self.style.configure('Title.TLabel',font=('Segoe UI',23,'bold')); self.style.configure('Heading.TLabel',font=('Segoe UI',17,'bold'))
-        self.style.configure('MalHani.Horizontal.TProgressbar',background='#197565',troughcolor='#d3e0dd',lightcolor='#197565',darkcolor='#197565',thickness=16)
+        self.style.configure('MH.Horizontal.TProgressbar',background='#197565',troughcolor='#d3e0dd',lightcolor='#197565',darkcolor='#197565',thickness=16)
         self.style.configure('TButton',font=('Segoe UI',11),padding=(12,8)); self.style.configure('TCheckbutton',background='#edf3f2',font=('Segoe UI',11))
         self.style.configure('TLabelframe',background='#edf3f2'); self.style.configure('TLabelframe.Label',background='#edf3f2',font=('Segoe UI',11,'bold'))
         top=ttk.Frame(self,padding=(26,22,26,10)); top.pack(fill='x')
-        ttk.Label(top,text='MalHani Launcher Setup',style='Title.TLabel').pack(anchor='w')
+        ttk.Label(top,text='MH Launcher Setup',style='Title.TLabel').pack(anchor='w')
         ttk.Label(top,text='Your Samsung TV, with a simpler home screen.').pack(anchor='w',pady=(3,0))
         self.steps=ttk.Label(self,text='');self.steps.pack(anchor='w',padx=28,pady=6)
         content=ttk.Frame(self);content.pack(fill='both',expand=True)
@@ -60,7 +62,7 @@ class Installer(tk.Tk):
         foot=ttk.Frame(self,padding=(26,10,26,22));foot.pack(fill='x')
         self.progress_text=tk.StringVar(value='Ready')
         ttk.Label(foot,textvariable=self.progress_text,font=('Segoe UI',12,'bold')).pack(anchor='w',pady=(0,5))
-        self.progress=ttk.Progressbar(foot,mode='determinate',maximum=100,style='MalHani.Horizontal.TProgressbar')
+        self.progress=ttk.Progressbar(foot,mode='determinate',maximum=100,style='MH.Horizontal.TProgressbar')
         self.progress.pack(fill='x',pady=(0,8))
         ttk.Label(foot,textvariable=self.status,wraplength=960).pack(anchor='w',fill='x',pady=(0,12))
         self.back_button=ttk.Button(foot,text='Back',command=self.back);self.back_button.pack(side='left')
@@ -343,14 +345,14 @@ class Installer(tk.Tk):
         def done(result):self.apps,self.inventory=result;self.backup=None;self.show();self.status.set('App inventory refreshed. A fresh backup will be captured automatically before installation.')
         self.task(lambda:self.sdk.inventory(self.ip.get()),done)
     def page4(self):
-        self.label('Ready to install MalHani Launcher',style='Heading.TLabel')
+        self.label('Ready to install MH Launcher',style='Heading.TLabel')
         d=self.info['device'];self.label('TV: '+str(d.get('modelName',d.get('model','Samsung TV')))+' · '+self.ip.get())
         self.label('Shortcuts: '+', '.join(s['title'] for s in self.specs()))
         missing=[s['title'] for s in self.specs() if not core.match_app(s,self.apps)]
         if missing:self.label('Still missing: '+', '.join(missing)+'. Install these through Samsung Apps to use them.')
         self.label('Keep the PC and TV on until installation finishes.')
         self.label('Next: set up automatic reopening on your TV.')
-        self.button('Restore a previous MalHani Launcher version',self.restore)
+        self.button('Restore a previous MH Launcher version',self.restore)
     def do_install(self):
         ip,profile,sdk=self.ip.get(),self.profile.get(),self.sdk
         try: config=core.build_config(self.specs(),self.apps,self.zone.get(),self.place.get(),self.clock24.get(),self.prayer.get())
@@ -373,11 +375,11 @@ class Installer(tk.Tk):
         self.canvas.yview_moveto(0)
         self.steps.configure(text='6 · Automatic reopening')
         self.label('Finish automatic reopening',style='Heading.TLabel')
-        self.label('MalHani Launcher and its startup service are installed. Finish the TV startup settings, then check reopening.')
+        self.label('MH Launcher and its startup service are installed. Finish the TV startup settings, then check reopening.')
         self.label('On your TV',style='Heading.TLabel')
         self.label('All Settings → Advanced Features (or General & Privacy) → Start Screen Options. Turn Start with Smart Hub Home OFF. If Autorun Last App is available, turn it ON.')
         self.button('Open TV settings',self.startup_settings)
-        self.label('Return to MalHani Launcher. Using the TV remote, switch the TV off, wait 10 seconds, then switch it on. Do not open the launcher yourself during this test.')
+        self.label('Return to MH Launcher. Using the TV remote, switch the TV off, wait 10 seconds, then switch it on. Do not open the launcher yourself during this test.')
         self.label('Back on your PC',style='Heading.TLabel')
         self.label('Keep this installer open while the TV restarts. Once the TV is back on, choose what appeared:')
         self.button('It reopened automatically',lambda:self.startup_result(True))
@@ -399,7 +401,7 @@ class Installer(tk.Tk):
         if self.working:return
         self.save_startup('owner-confirmed-pass' if passed else 'needs-attention')
         if not passed:
-            self.status.set('Startup needs attention. Check Smart Hub Home startup is OFF, return to MalHani Launcher and retry. If the option is unavailable or it still fails, this TV’s automatic reopening is not verified.')
+            self.status.set('Startup needs attention. Check Smart Hub Home startup is OFF, return to MH Launcher and retry. If the option is unavailable or it still fails, this TV’s automatic reopening is not verified.')
             return
         if self.testing:
             self.setup_complete();return
@@ -417,7 +419,7 @@ class Installer(tk.Tk):
     def setup_complete(self):
         for child in self.body.winfo_children():child.destroy()
         self.label('Your launcher is ready',style='Heading.TLabel')
-        self.label('On your TV: press “Let’s go” to enter MalHani Launcher.')
+        self.label('On your TV: press “Let’s go” to enter MH Launcher.')
         self.label('You can turn off the PC now.')
         self.label('Verified backup: '+str(self.backup))
         self.next_button.configure(text='Finish',command=self.close,state='normal')
@@ -426,8 +428,8 @@ class Installer(tk.Tk):
         (self.home/'setup.json').write_text(json.dumps(saved,indent=2),encoding='utf-8');self.saved_setup=saved
         self.status.set('Setup complete. Automatic reopening confirmed by you on this TV.')
     def restore(self):
-        folder=filedialog.askdirectory(initialdir=self.home/'backups',title='Select a MalHani Launcher backup containing a previous installer version')
-        if folder:self.task(lambda:core.rollback(self.sdk,self.ip.get(),Path(folder)),lambda _:self.status.set('Previous MalHani Launcher package restored and launch verified. Samsung settings and third-party app data are outside this rollback.'))
+        folder=filedialog.askdirectory(initialdir=self.home/'backups',title='Select a MH Launcher backup containing a previous installer version')
+        if folder:self.task(lambda:core.rollback(self.sdk,self.ip.get(),Path(folder)),lambda _:self.status.set('Previous MH Launcher package restored and launch verified. Samsung settings and third-party app data are outside this rollback.'))
 
 if __name__=='__main__':
     if '--self-test' in sys.argv:

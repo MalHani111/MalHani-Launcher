@@ -1,4 +1,4 @@
-# MalHani Launcher Setup
+# MH Launcher Setup
 
 Version 0.1.0 · Windows x64 preview · includes Samsung tools
 
@@ -6,23 +6,23 @@ A guided, local installer for a simpler Samsung TV home screen. First setup need
 
 ## Use
 
-1. Download and open `MalHani-Launcher-Setup.exe` from this project's release. No Python or Node installation is required.
+1. Download and open `MH-Launcher-Setup.exe` from this project's release. No Python or Node installation is required.
 2. Keep the Windows PC and TV on the same home network. Discovery starts automatically. A single TV is selected automatically; choose one only if several are found.
 3. The required Samsung tools are bundled, checked and extracted automatically. Progress is shown while they are prepared. There are no tool-folder or component choices in the normal flow. Existing complete tools can be reused.
 4. If Developer Mode is needed, follow the instructions shown on the TV. Enter the PC address displayed by the installer and restart the TV. Ready checks continue automatically.
 5. Samsung Certificate Manager opens when needed. Complete Samsung sign-in and the TV certificate steps, choosing Partner for the distributor certificate. The installer detects completion and continues automatically. Technical recovery controls are under Advanced setup.
    In Certificate Manager:
    - Click **+ → Samsung → TV**.
-   - Name the profile, for example **MalHaniTV**.
+   - Name the profile, for example **MHLauncherTV**.
    - Create an author certificate using your name and a password you keep. For updates, reuse the existing author certificate.
    - Sign in to Samsung and choose a certificate backup folder.
    - Create a distributor certificate with **Partner** privileges.
    - Click **+** beside your connected TV to add its **DUID**, then finish the wizard.
-   - Return to MalHani Launcher Setup; it detects the profile and continues automatically.
+   - Return to MH Launcher Setup; it detects the profile and continues automatically.
 6. Available TV information, app inventory and encrypted signing credentials are backed up and checked automatically. A backup report explains what is missing. You can import Samsung's USB settings export if your model supports one; the program cannot create that export itself.
 7. Choose app shortcuts and clock/prayer preferences. Netflix, YouTube, Unifi TV, Prime Video, Disney+, Spotify and Stremio are offered. Existing apps are detected. Missing apps require installation by the owner in Samsung Apps; the installer opens that store and can recheck. Availability varies by region/model. No third-party app binaries are bundled or silently installed.
 8. Click **Install Launcher**. A fresh verified backup is captured before TV changes. The launcher is signed with your own profile, installed and checked through the TV's local API.
-9. Finish automatic reopening: open TV settings, turn **Start with Smart Hub Home OFF** and enable **Autorun Last App** if available. Return to MalHani Launcher, switch the TV off with its remote for 10 seconds, then switch it on. Keep the PC installer open during the TV restart. Back on the PC, confirm what appeared on the TV. After a successful test, the installer finishes setup and shows the welcome message as the final TV screen. Press Let’s go on the TV remote to enter the launcher. No PC helper launches the app during the startup check.
+9. Finish automatic reopening: open TV settings, turn **Start with Smart Hub Home OFF** and enable **Autorun Last App** if available. Return to MH Launcher, switch the TV off with its remote for 10 seconds, then switch it on. Keep the PC installer open during the TV restart. Back on the PC, confirm what appeared on the TV. After a successful test, the installer finishes setup and shows the welcome message as the final TV screen. Press Let’s go on the TV remote to enter the launcher. No PC helper launches the app during the startup check.
 
 
 
@@ -34,13 +34,13 @@ Local data lives under `%LOCALAPPDATA%\OpenHomeTV`. Do not publish or upload thi
 - Verified: backup files are hashed and checked before installation. The encrypted signing bundle is decrypted in memory to verify round-trip integrity.
 - Not captured: a full TV recovery image, third-party application binaries/data, account logins, and most protected picture/sound settings. Developer Mode is already enabled by the owner before the SDK inventory is available.
 - Configuration archives are the last installer-generated configuration; later edits made only on the TV are not exported.
-- A first install cannot recover a package installed by another tool. **Restore a previous MalHani Launcher version** only works when a verified backup contains a previous installer-managed package for that same TV.
+- A first install cannot recover a package installed by another tool. **Restore a previous MH Launcher version** only works when a verified backup contains a previous installer-managed package for that same TV.
 - DPAPI signing backups are tied to the same Windows user and machine. Preserve your certificate passwords separately. Re-signing or moving to another machine may require Samsung Certificate Manager and the owner's certificate password.
 - The USB import has a 4 GB limit and accepts the exported folder, not an entire drive. Keep larger exports separately.
 
 ## Automatic startup and compatibility
 
-MalHani Startup is bundled inside the launcher package. It requests boot startup and automatic service restart, opens MalHani Launcher once, retries temporary launch failures up to 15 times, then stays idle. The installer checks the actual distributor certificate issuer for Partner/Platform privileges before installing; a Public certificate stops setup with instructions. The TV still validates signatures and device authorization. It requires no PC helper or network service.
+MH Startup is bundled inside the launcher package. It requests boot startup and automatic service restart, opens MH Launcher once, retries temporary launch failures up to 15 times, then stays idle. The installer checks the actual distributor certificate issuer for Partner/Platform privileges before installing; a Public certificate stops setup with instructions. The TV still validates signatures and device authorization. It requires no PC helper or network service.
 
 The separate startup-helper variant passed one owner-observed full-restart test on the U8000H/Tizen 10: the TV went offline, returned, and the existing launcher became visible without a PC launch command. The combined public launcher/service package has passed real SDK signing and simulated lifecycle checks, but has not yet been installed on a second TV. Other firmware/models and repeated cold boots remain unverified. The installer asks the owner to check startup on their TV before marking setup complete.
 

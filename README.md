@@ -1,16 +1,16 @@
-<p align="center"><img src="launcher/profile.jpg" width="120" alt="MalHani"></p>
+<p align="center"><img src="launcher/brand-mark.svg" width="120" alt="MH Launcher"></p>
 
-# MalHani Launcher
+# MH Launcher
 
 A customizable Samsung TV home screen with app shortcuts, nature backgrounds, a clock and optional Malaysian waktu solat.
 
-**MalHani Launcher Setup** guides installation from a Windows PC, prepares the Samsung tools automatically, and shows clear progress.
+**MH Launcher Setup** guides installation from a Windows PC, prepares the Samsung tools automatically, and shows clear progress.
 
 ## Get started
 
 The first Windows preview is being prepared. Downloads will appear under [Releases](https://github.com/MalHani111/MalHani-Launcher/releases).
 
-1. Open **MalHani-Launcher-Setup.exe** on Windows x64.
+1. Open **MH-Launcher-Setup.exe** on Windows x64.
 2. Keep the PC and TV on the same home network. Your TV is discovered automatically.
 3. Follow the TV Developer Mode instructions and complete Samsung sign-in and certificate creation when prompted. The on-screen guide covers each certificate step.
 4. Choose your app shortcuts, clock and prayer preferences, then install.
@@ -18,7 +18,7 @@ The first Windows preview is being prepared. Downloads will appear under [Releas
 
 Samsung tools are included in the full download. Accessible TV information and installer-managed files are backed up before changes; importing a supported Samsung USB settings backup is optional.
 
-![App selection in MalHani Launcher Setup](docs/setup-preview.png)
+![App selection in MH Launcher Setup](docs/setup-preview.png)
 
 ## Features
 
@@ -44,8 +44,8 @@ python installer.py --self-test
 .\build.ps1
 ```
 
-Git contains the application source and tool manifest. The large Samsung tool archive is distributed in the full release source ZIP: copy its `MalHani/bundled-tools/samsung-tools.zip` beside the checked-in manifest before building a bundled installer. Without that archive, the source installer uses its automatic vendor-tool download path.
+Git contains the application source and tool manifest. The large Samsung tool archive is distributed in the full release source ZIP: copy its `MH-Launcher/bundled-tools/samsung-tools.zip` beside the checked-in manifest before building a bundled installer. Without that archive, the source installer uses its automatic vendor-tool download path.
 
 ## Credits
 
-Created and customized as **MalHani Launcher**. Based on [Dylan Fernandez de Lara's Samsung TV Launcher](https://github.com/dylanfernandezdelara/samsung-tv-launcher), under the MIT licence. See [LICENSE](LICENSE), [NOTICE.md](NOTICE.md) and [wallpaper credits](launcher/wallpapers/CREDITS.txt). Samsung/Tizen tools retain their own licences. This project is independent of Samsung and the app publishers.
+Created and customized as **MH Launcher**. Based on [Dylan Fernandez de Lara's Samsung TV Launcher](https://github.com/dylanfernandezdelara/samsung-tv-launcher), under the MIT licence. See [LICENSE](LICENSE), [NOTICE.md](NOTICE.md) and [wallpaper credits](launcher/wallpapers/CREDITS.txt). Samsung/Tizen tools retain their own licences. This project is independent of Samsung and the app publishers.

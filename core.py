@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 APP_ID = 'OpenHomeTV.Launcher'
 APP_PACKAGE = 'OpenHomeTV'
 STARTUP_ID = APP_PACKAGE + '.Startup'
@@ -408,7 +408,7 @@ def install_package(sdk,ip,package):
     with zipfile.ZipFile(package) as archive:
         root=ET.fromstring(archive.read('config.xml'))
         app=root.find('{http://tizen.org/ns/widgets}application')
-        if app is None or app.get('id')!=APP_ID: raise SetupError('This is not an MalHani Launcher launcher package. Installation stopped.')
+        if app is None or app.get('id')!=APP_ID: raise SetupError('This is not an MH Launcher package. Installation stopped.')
     result=command([sdk.cli,'install','-s',ip+':26101','-n',Path(package).name,'--',Path(package).parent],180)
     if 'successfully installed' not in result.lower(): raise SetupError('Installation was not confirmed.\n'+result[-1500:])
     result=command([sdk.cli,'run','-s',ip+':26101','-p',APP_ID],40)

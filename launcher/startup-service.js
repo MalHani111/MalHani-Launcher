@@ -1,10 +1,10 @@
 'use strict';
-// TV-side boot service bundled with MalHani Launcher.
+// TV-side boot service bundled with MH Launcher.
 var target = 'OpenHomeTV.Launcher';
 var timer = null, keepalive = null, started = false, finished = false, attempts = 0;
 function retry(error) {
   if (finished || !started) return;
-  console.log('MalHani startup: launch attempt failed: ' + (error && error.name || 'unknown'));
+  console.log('MH startup: launch attempt failed: ' + (error && error.name || 'unknown'));
   if (attempts >= 15 || (error && /SecurityError|NotFoundError/.test(error.name))) {
     finished = true;
     return;
@@ -18,7 +18,7 @@ function attempt() {
   try {
     tizen.application.launch(target, function () {
       finished = true;
-      console.log('MalHani startup: launcher start accepted.');
+      console.log('MH startup: launcher start accepted.');
     }, retry);
   } catch (error) { retry(error); }
 }

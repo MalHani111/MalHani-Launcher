@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://localhost/open-home-tv" version="1.0.0" viewmodes="maximized">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://localhost/open-home-tv" version="1.0.1" viewmodes="maximized">
     <tizen:application id="OpenHomeTV.Launcher" package="OpenHomeTV" required_version="2.3"/>
     <content src="index.html"/>
     <!-- reopening the launcher (e.g. its auto-return) shows the running page instead of reloading it -->
@@ -11,11 +11,11 @@
     <tizen:feature name="http://tizen.org/feature/web.service"/>
     <tizen:service id="OpenHomeTV.Startup" type="ui" on-boot="true" auto-restart="true">
         <tizen:content src="startup-service.js"/>
-        <tizen:name>MalHani Startup</tizen:name>
-        <tizen:description>Starts MalHani Launcher after TV boot.</tizen:description>
+        <tizen:name>MH Startup</tizen:name>
+        <tizen:description>Starts MH Launcher after TV boot.</tizen:description>
     </tizen:service>
     <icon src="icon.png"/>
-    <name>MalHani Launcher</name>
+    <name>MH Launcher</name>
     <tizen:privilege name="http://tizen.org/privilege/application.info"/>
     <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
     <tizen:privilege name="http://tizen.org/privilege/tv.window"/>

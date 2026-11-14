@@ -18,7 +18,7 @@
     panel = document.createElement('section');
     panel.id = 'openhome-welcome';
     panel.style.cssText = 'position:absolute;inset:0;z-index:500;box-sizing:border-box;background:linear-gradient(135deg,#103b39,#1c2350);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:70px';
-    var profile = document.createElement('img'); profile.src = 'profile.jpg'; profile.alt = 'MalHani'; profile.width = 240; profile.height = 240; profile.style.cssText = 'width:240px;height:240px;flex-shrink:0;object-fit:cover;border-radius:50%;margin:0 0 28px';
+    var profile = document.createElement('img'); profile.src = 'brand-mark.png'; profile.alt = 'MH Launcher'; profile.width = 240; profile.height = 240; profile.style.cssText = 'width:240px;height:240px;flex-shrink:0;object-fit:cover;border-radius:50%;margin:0 0 28px';
     var title = document.createElement('h1'); title.textContent = 'Terima kasih guna installer ni.'; title.style.cssText = 'font-size:56px;max-width:1450px;margin:0 0 16px';
     var text = document.createElement('p'); text.textContent = 'Harap korang suka la launcher baru ni.\n\nAda banyak ruang lagi boleh custom. Enjoy!!!'; text.style.cssText = 'font-size:32px;line-height:1.5;max-width:1300px;white-space:pre-line;margin:0';
     var button = document.createElement('button'); button.textContent = "Let's go"; button.style.cssText = 'font-family:inherit;margin-top:32px;padding:20px 60px;background:#e4f4ed;color:#102b28;border:4px solid white;border-radius:25px;font-size:32px'; button.onclick = close;
